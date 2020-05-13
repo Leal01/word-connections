@@ -1,0 +1,11 @@
+# Ignore binary files without extension
+*
+!*.*
+!*/
+!Makefile
+
+# Ignore .o files
+*.o
+
+#Ignore text files
+*.txt
