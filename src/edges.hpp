@@ -3,9 +3,9 @@
 
 #include "graph.hpp"
 
-int makeEdges(Graph * graph, int edges, int vertices);
-int swappingLetters(Graph * graph, int edges, int vertices);
-int replacingLetters(Graph * graph, int edges, int vertices);
-int removingOrInsertingLetters(Graph * graph, int edges, int vertices);
+int makeEdges(Graph * graph, int edges, int vertices, string newWord);
+int swappingLetter(string newWord, string aux);
+int replacingLetter(string newWord, string aux);
+int removingOrInsertingLetter(string newWord, string aux);
 
 #endif

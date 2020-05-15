@@ -5,7 +5,7 @@
 int main(int argc, char * argv[]) {
    int numEdgesAdded, testInput = 1;
    Graph * graph;
-   fstream texFile;
+   fstream textFile;
    string word;
 
    if (argc < 3) {
@@ -20,12 +20,14 @@ int main(int argc, char * argv[]) {
       exit(EXIT_FAILURE);
    }
 
-   graph = new Graph(stoi(argv[1]));
+   
 
-   else 
+   else  {
+      graph = new Graph(stoi(argv[1]));
       while (textFile >> word)
          numEdgesAdded = graph->insert(word);
       
+   }
    textFile.close();
    while (testInput != 0) {
       graph->print();

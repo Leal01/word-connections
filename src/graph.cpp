@@ -7,9 +7,7 @@ Graph(int k){
    edges = 0;
 }
 
-int insere(string word) {
-   vector<pair<int, string>> aux;
-   
+int insert(string word) {
    if (word.length() < minimunNumOfLetters)
       return -1;
    
@@ -17,11 +15,11 @@ int insere(string word) {
       if (graph[v][0].second == word)
          return -1;
 
-   graph[V][0].push_back(make_pair(0, word));
-   graph[0][V].push_back(make_pair(0, word));
+   graph[vertices][0].push_back(make_pair(0, word));
+   graph[0][vertices].push_back(make_pair(0, word));
    vertices++;
 
-   int newEdges = makeEdges(graph, edges, vertices);
+   int newEdges = makeEdges(graph, edges, vertices, word);
    edges += newEdges;
 
    return edges;
@@ -29,15 +27,15 @@ int insere(string word) {
    retorna -1 se a palavra já está no grafo ou tem tamanho menor que k*/
 }
 
-int vertices(){
+int getVertices(){
    return vertices;
 }
 
-int arestas(){
+int getEdges(){
    return edges;
 }
 
-int componentes(){
+int components(){
    /* Retorna o número de componentes do grafo */
 }
 
