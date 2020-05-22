@@ -1,11 +1,11 @@
 #ifndef _EDGES_HPP
 #define _EDGES_HPP
 
-#include "graph.hpp"
+#include <string>
+using namespace std;
 
-int makeEdges(Graph * graph, int edges, int vertices, string newWord);
-int swappingLetter(string newWord, string aux);
-int replacingLetter(string newWord, string aux);
-int removingOrInsertingLetter(string newWord, string aux);
+bool swappingLetter(string newWord, string aux);
+bool replacingLetter(string newWord, string aux);
+bool removingOrInsertingLetter(string newWord, string aux);
 
 #endif

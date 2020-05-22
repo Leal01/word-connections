@@ -3,8 +3,8 @@ CFLAGS = -Wall -g -O0
 SRC		 = ./src
 RM		 = rm
 
-ep2: main.o graph.o 
-	$(CC) -o ep2 main.o graph.o 
+ep2: main.o graph.o edges.o
+	$(CC) -o ep2 main.o graph.o edges.o
 
 main.o: $(SRC)/main.cpp $(SRC)/graph.hpp
 	$(CC) $(CFLAGS) -c $(SRC)/main.cpp

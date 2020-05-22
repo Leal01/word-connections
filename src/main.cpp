@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+using namespace std;
 #include "graph.hpp"
+#include "edges.hpp"
 
 int main(int argc, char * argv[]) {
    int numEdgesAdded, testInput = 1;
@@ -20,14 +23,11 @@ int main(int argc, char * argv[]) {
       exit(EXIT_FAILURE);
    }
 
-   
+   graph = new Graph(strtol(argv[1], nullptr, 10));
 
-   else  {
-      graph = new Graph(stoi(argv[1]));
-      while (textFile >> word)
-         numEdgesAdded = graph->insert(word);
-      
-   }
+   while (textFile >> word)
+      numEdgesAdded = graph->insert(word);
+         
    textFile.close();
    while (testInput != 0) {
       graph->print();

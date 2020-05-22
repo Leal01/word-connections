@@ -1,82 +1,89 @@
 #include "edges.hpp"
 
-int makeEdges(Graph * graph, int edges, int vertices, string newWord) {
-   int newEdges = 0;
+#include <vector>
 
-   for (int v = 0; v < vertices; v++) {
-      for (int u = v + 1; u < graph[v].size(); u++) {
-         string aux = graph[v][u].second;
-
-         if (swappingLetter(newWord, aux) || replacingLetter(newWord, aux) || removingOrInsertingLetter(newWord, aux)) {
-            graph[v][u].first = 1;
-            graph[u][v].first = 1;
-            newEdges++;
-         }
-      }
-   }
-   return newEdges;
-}
+vector<int> subtractWords(string newWord, string aux) ;
 
 // Trocando letras de uma mesma palavra
-int swappingLetter(string newWord, string aux) {}
-   string reset = aux;
-   char aux2;
+bool swappingLetter(string newWord, string aux) {
+   if (newWord.length() == aux.length()) {
+      int differentLetters = 0;
+      int pos1 = -1, pos2 = -1;
+      vector<int> wordsSubtracted = subtractWords(newWord, aux);
 
-   for (int i = 0; i < aux.length(); i++) {
-      for (int j = i+1; j < aux.length(); j++) {
-         aux2 = aux[i];
-         aux[i] = aux[j];
-         aux[j] = aux2;
+      for (unsigned int i = 0; i < wordsSubtracted.size() && differentLetters <= 2; i++) {
+         if (wordsSubtracted[i] != 0) {
+            differentLetters++;
 
-         if (aux == newWord)  
-            return 1;
-
-         aux = reset; 
+            if (differentLetters <= 2) {
+               if (pos1 == -1)
+                  pos1 = i;
+               else
+                  pos2 = i;
+            }
+         }
       }
+
+      if (differentLetters == 2)
+         if (newWord[pos1] == aux[pos2] && newWord[pos2] == aux[pos1])
+            return true;
+
+      return false;
    }
 
-   return 0;   
+   return false;   
 }
 
 // Substituindo letras
-int replacingLetter(string newWord, string aux) {
-   string reset = aux; 
-   for (int i = 0; i < aux.length(); i++) {
-      aux = reset;
-      aux[i] = 'a';
-      for (int j = 0; j < 26; j++) {
-         if (aux == newWord) 
-            return 1;
-         
-         aux[i] = aux[i] + 1;
-      }
+bool replacingLetter(string newWord, string aux) {
+   if (newWord.length() == aux.length()) {
+      int differentLetters = 0;
+      vector<int> wordsSubtracted = subtractWords(newWord, aux);
+
+      for (unsigned int i = 0; i < wordsSubtracted.size(); i++) 
+         if (wordsSubtracted[i] != 0)
+            differentLetters++;
+      
+      if (differentLetters == 1)
+         return true;
    }
 
-   return 0;
+   return false;
 }
 
 // Adicionando ou removendo uma letra
-int removingOrInsertingLetter(string newWord, string aux) {
-   string reset = aux;
-   
-   for (int i = 0; i < aux.length(); i++) {
-      aux.erase(aux.begin() + i);
-      if (aux == newWord)
-         return 1;
-      aux = reset
+bool removingOrInsertingLetter(string newWord, string aux) {
+   string bigger, smaller;
+   int smallerIndex = 0;
+
+   if (newWord.length() == aux.length() + 1) {
+      bigger = newWord;
+      smaller = aux;
    }
 
-   aux.push_back('a');
-   for (int i = aux.length() - 1; i >= 0; i--) {
-      for (int j = 0; j < 26; j++) {
-         if (aux == newWord) 
-            return 1;
-         
-         aux[i] = aux[i] + 1;
-      }
-      aux[i] = 'a';
-      char aux2 = aux[i-1];
-      aux[i-1] = aux[i];
-      aux[i] = aux2;
+   else if (newWord.length() + 1 == aux.length()) {
+      bigger = aux;
+      smaller = newWord;
    }
+
+   else
+      return false;
+
+   for (unsigned int i = 0; i < bigger.length(); i++)
+      if (bigger[i] == smaller[smallerIndex])
+         smallerIndex++;
+
+   if (smallerIndex == (int) smaller.length())
+      return true;
+   
+   return false;
+}
+
+vector<int> subtractWords(string newWord, string aux) {
+   vector<int> wordsSubtracted;
+   // strings have the same length
+   for (unsigned int i = 0; i < aux.length(); i++) 
+      wordsSubtracted.push_back(abs(newWord[i] - aux[i]));
+   
+   return wordsSubtracted;
 }

@@ -1,11 +1,11 @@
 #ifndef _GRAPH_HPP
 #define _GRAPH_HPP
 
-
 #include <vector>
+#include <iostream>
 #include <string>
 using namespace std;
-#include "edges.hpp"
+
 
 //k definido como no enunciado será passado como argumento de linha de comando
 class Graph {
@@ -14,7 +14,7 @@ class Graph {
       int minimunNumOfLetters;
       int vertices;
       int edges;
-
+      
    public:
       Graph(int k);
       int insert(string word);
@@ -26,6 +26,7 @@ class Graph {
       int dist(string a, string b);
       bool emCiclo(string a);
       bool emCiclo(string a, string b);
+      void print();
 };
 
 #endif
