@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <queue>
 using namespace std;
 
 
@@ -14,19 +15,25 @@ class Graph {
       int minimunNumOfLetters;
       int vertices;
       int edges;
+      int wordFinder(string word);
+      void dfsR(int v, vector<bool> & visited);
+      void checkCycles(int u, int p, vector<int> & color, vector<int> & previousNode, vector<int> & cycles, int wordCycle);
+      void addVertices(int currentIndex, string auxWord, int lastVertice, string newWord);
       
    public:
       Graph(int k);
       int insert(string word);
       int getVertices();
       int getEdges();
-      int components();
-      bool conexo();
-      int tamComp(string palavra);
-      int dist(string a, string b);
-      bool emCiclo(string a);
-      bool emCiclo(string a, string b);
+      int getComponents();
+      bool isConnected();
+      int componentSize(string palavra);
+      int distance(string a, string b);
+      bool isWordInCycle(string a);
+      bool shareSameCycle(string a, string b);
+      int averageDegree();
       void print();
+      
 };
 
 #endif
